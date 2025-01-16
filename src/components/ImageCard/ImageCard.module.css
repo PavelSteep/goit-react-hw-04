@@ -1,0 +1,11 @@
+.ImageCard img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.ImageCard img:hover {
+  transform: scale(1.05);
+}
