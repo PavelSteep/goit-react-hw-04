@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './ImageCard.module.css';
+import css from './ImageCard.module.css';
 
-const ImageCard = ({ src, alt, onClick }) => ( 
-  <li className="ImageCard" onClick={onClick}>
-    <img src={src} alt={alt} />
-  </li> 
+const ImageCard = ({ src, alt, onClick }) => (
+  <img src={src} alt={alt} onClick={onClick} className={css.ImageCardImage} />
 );
 
 ImageCard.propTypes = {

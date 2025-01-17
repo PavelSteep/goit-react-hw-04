@@ -1,25 +1,82 @@
-.ImageModal-overlay {
+.ImageModalOverlay {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
 }
 
-.ImageModal-content {
+.ImageModalContent {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
   max-width: 90%;
   max-height: 90%;
-  border-radius: 8px;
-  overflow: hidden;
+  overflow: auto;
 }
 
-.ImageModal img {
+.ImageModalCloseButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #df0d0d;
+  z-index: 1001;
+}
+
+.ImageModalCloseButton:hover {
+  color: #ff6347;
+}
+
+.ImageModalImage {
   display: block;
-  width: 100%;
-  height: auto;
+  max-width: 100%;
+  /* max-height: 70vh; */
+  max-height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  .ImageModalContent {
+    max-width: 95%;
+    padding: 15px;
+  }
+
+  .ImageModalCloseButton {
+    font-size: 20px;
+    top: 5px;
+    right: 5px;
+  }
+
+  .ImageModalImage {
+    max-height: 60vh;
+    border-radius: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ImageModalContent {
+    max-width: 90%;
+    padding: 10px;
+  }
+
+  .ImageModalCloseButton {
+    font-size: 18px;
+    top: 3px;
+    right: 3px;
+  }
+
+  .ImageModalImage {
+    max-height: 50vh;
+    border-radius: 3px;
+  }
 }

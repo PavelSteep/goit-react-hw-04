@@ -7,12 +7,7 @@ import ImageModal from './ImageModal/ImageModal';
 import ErrorMessage from './ErrorMessage/ErrorMessage';
 import toast, { Toaster } from 'react-hot-toast';
 import axios from 'axios';
-import iziToast from 'izitoast';
-import 'izitoast/dist/css/iziToast.min.css';
-// import SimpleLightbox from 'simplelightbox';
-import 'simplelightbox/dist/simple-lightbox.min.css';
-import SimpleLightbox from 'simplelightbox/dist/simple-lightbox.esm';
-import './App.module.css';
+import css from './App.module.css';
 
 const App = () => {
   const [images, setImages] = useState([]);
@@ -22,20 +17,8 @@ const App = () => {
   const [error, setError] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
 
-  const API_KEY = '091343ce13c8ae780065ecb3b13dc903475dd22cb78a05503c2e0c69c5e98044';
+  const API_KEY = '7ONfI7UAT2PSN72enwnwIF_Hz9RWzxRm5xMYrdv1n-4';
   const BASE_URL = 'https://api.unsplash.com/search/photos';
-
-  // useEffect для инициализации SimpleLightbox
-  useEffect(() => {
-    const lightbox = new SimpleLightbox('.gallery a', {
-      captions: true,
-      captionDelay: 250,
-    });
-
-    return () => {
-      lightbox.destroy(); // Уничтожаем экземпляр при размонтировании
-    };
-  }, [images]);
 
   useEffect(() => {
     if (!searchQuery) return;
@@ -54,18 +37,13 @@ const App = () => {
         const newImages = response.data.results;
 
         if (newImages.length === 0 && page === 1) {
-          toast.error('Ничего не найдено по вашему запросу.');
+          toast.error('No results found for your query.');
           return;
         }
 
         setImages(prevImages => [...prevImages, ...newImages]);
 
-        iziToast.show({
-          title: 'Successfully!',
-          message: `Found ${newImages.length} Images.`,
-          position: 'topRight',
-          color: 'green',
-        });
+        toast.success(`Found ${newImages.length} images.`);
       } catch (error) {
         setError('An error occurred while loading images.');
         toast.error('Failed to load images.');
@@ -79,7 +57,7 @@ const App = () => {
 
   const handleSearchSubmit = query => {
     if (query.trim() === '') {
-      toast.error('Enter text to search.');
+      toast.error('Please enter a search query.');
       return;
     }
     setSearchQuery(query);
@@ -100,14 +78,20 @@ const App = () => {
   };
 
   return (
-    <div className="App">
+    <div className={css.App}>
       <Toaster position="top-right" />
       <SearchBar onSubmit={handleSearchSubmit} />
       {error && <ErrorMessage message={error} />}
       <ImageGallery images={images} onImageClick={handleImageClick} />
-      {isLoading && <Loader />}
+      {isLoading && <Loader size={100} color="#ff5733" />}
       {images.length > 0 && !isLoading && <LoadMoreBtn onClick={handleLoadMore} />}
-      {selectedImage && <ImageModal image={selectedImage} onClose={closeModal} />}
+      {selectedImage && (
+        <ImageModal
+          src={selectedImage.urls.full}
+          alt={selectedImage.alt_description}
+          onClose={closeModal}
+        />
+      )}
     </div>
   );
 };

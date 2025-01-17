@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './ImageGallery.module.css';
+import css from './ImageGallery.module.css';
 import ImageCard from '../ImageCard/ImageCard';
 
 const ImageGallery = ({ images, onImageClick }) => (
-  <ul className="ImageGallery">
+  <ul className={css.ImageGallery}>
     {images.map(image => (
-      <li key={image.id} className="ImageGallery-item">
+      <li key={image.id} className={css.ImageGalleryItem}>
         <ImageCard
           src={image.urls.small}
-          alt={image.alt_description}
+          alt={image.alt_description || 'No description'}
           onClick={() => onImageClick(image)}
         />
       </li>

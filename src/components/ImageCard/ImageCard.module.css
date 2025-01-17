@@ -1,11 +1,35 @@
-.ImageCard img {
-  display: block;
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  transition: transform 0.3s ease;
+.ImageCardImage {
+  list-style: none;
+  width: 100%; /* Изображение будет растягиваться на всю ширину родительского контейнера */
+  height: auto; /* Высота будет автоматически подстраиваться в зависимости от пропорций */
+  margin: 20px auto;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.ImageCard img:hover {
-  transform: scale(1.05);
+.ImageCardImage img {
+  display: block;
+  width: 100%; /* Растягиваем изображение по ширине контейнера */
+  height: auto; /* Высота изображения подстраивается автоматически */
+  object-fit: cover; /* Картинка будет обрезаться по нужным пропорциям */
+  cursor: pointer;
+}
+
+.ImageCardImage img:hover {
+  opacity: 0.9;
+}
+
+.ImageCardImage:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .ImageCardImage {
+    width: 100%; /* На мобильных устройствах изображение тоже будет растягиваться на 100% */
+    margin: 10px;
+  }
 }
